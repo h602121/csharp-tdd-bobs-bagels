@@ -11,26 +11,31 @@ public class Tests
 
     [TestCase ("Bagel", true)]
     [TestCase ("ChocolateBagel", true)]
-    [TestCase ("HamBagel", false)]
+    [TestCase ("HamBagel", true)]
     public void AddBagelTest(string bagel, bool expected)
     {
         List<string> bagels = new List<string> ();
-        bagels.Capacity = 2;
-        Basket core = new Basket();
-
-        bool actual = core.AddBagel(bagel);
+       
+        Basket basket = new Basket(2, bagels);
         
-        Assert.That(expected, Is.EqualTo(actual));
+        bool added1 = basket.AddBagel("Bagel");
+        bool added2 = basket.AddBagel("ChocolateBagel");
+        bool added3 = basket.AddBagel("HamBagel");
+        
+        Assert.That(true, Is.EqualTo(added1));
+        Assert.That(true, Is.EqualTo(added2));
+        Assert.That(false, Is.EqualTo(added3));
     }
 
     [Test]
     public void RemoveBagelTest()
     {
+        int maxCapacity = 10;
         List<string> bagels = new List<string>();
         bagels.Add("Bagel");
         bagels.Add("ChocolateBagel");
 
-        Basket basket = new Basket();
+        Basket basket = new Basket(maxCapacity,bagels);
 
         string bagel1 = "Bagel"; 
         string bagel2 = "ChocolateBagel"; 
@@ -50,8 +55,8 @@ public class Tests
     [TestCase (5)]
     public void changeCapacity(int capacity)
     {
-        Basket basket = new Basket();
         List<string> bagels = new List<string>();
+        Basket basket = new Basket(capacity, bagels);
         int expectedCapacity = capacity;
 
         int actualCapacity = basket.changeCapacity(capacity);
