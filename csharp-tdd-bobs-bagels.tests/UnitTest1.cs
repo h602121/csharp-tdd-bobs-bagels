@@ -44,10 +44,18 @@ public class Tests
         Assert.That(removed3, Is.EqualTo(false));
     }
 
-    [Test]
-    public void isFullTest()
-    { 
-        
-    
+    [TestCase (3)]
+    [TestCase (4)]
+    [TestCase (1)]
+    [TestCase (5)]
+    public void changeCapacity(int capacity)
+    {
+        Basket basket = new Basket();
+        List<string> bagels = new List<string>();
+        int expectedCapacity = capacity;
+
+        int actualCapacity = basket.changeCapacity(capacity);
+
+        Assert.That(actualCapacity, Is.EqualTo(expectedCapacity));
     }
 }

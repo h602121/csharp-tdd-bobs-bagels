@@ -13,6 +13,11 @@ namespace tdd_bobs_bagels.CSharp.Main
             return false;
         }
 
+        public int changeCapacity(int capacity)
+        {
+            return 0;
+        }
+
         public bool removeBagel(string bagel1)
         {
             return false;
